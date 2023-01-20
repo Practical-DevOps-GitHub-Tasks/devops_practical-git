@@ -9,6 +9,10 @@
 
 name: Ruby
 
+env:
+    URL: ${{secrets.URL}}
+    TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 on:
   push:
     branches: [ main ]
