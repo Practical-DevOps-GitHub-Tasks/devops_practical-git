@@ -62,10 +62,16 @@ class ScriptTest < Test::Unit::TestCase
     assert_not_nil(actual, 'We should not allow merge to develop branch without PR ')
   end
 
-  def test_2_approve_develop
+  def test_2_approvals_develop
     actual = @obj.rules_required_pull_request_reviews('develop').nil? || @obj.rules_required_pull_request_reviews('develop')["required_approving_review_count"]
     expected = 2
     assert_equal(expected, actual, 'We should have 2 approvals before merge to develop branch')
+  end
+
+  def test_without_approval_main
+    actual = @obj.rules_required_pull_request_reviews('main').nil? || @obj.rules_required_pull_request_reviews('develop')["required_approving_review_count"]
+    expected = 0
+    assert_equal(expected, actual, 'We shouldn\'t have any approvals before merge to main branch')
   end
 
   def test_approve_from_user

@@ -2,13 +2,14 @@ require 'net/http'
 require 'uri'
 require 'json'
 class GithubApi
+  @@prefix = 'https://api.github.com/repos'
 
   def initialize(repo_uri, token)
     @repo_uri =  repo_uri
     @token = token
   end
   def get(url)
-    uri = URI.parse("#{@repo_uri}#{"/#{url}" if url != ''}")
+    uri = URI.parse("#{@@prefix}/#{@repo_uri}#{"/#{url}" if url != ''}")
     request = Net::HTTP::Get.new(uri)
     request["Accept"] = "application/vnd.github+json"
     request["Authorization"] = "Bearer #{@token}"
@@ -47,10 +48,10 @@ class GithubApi
 
   def file_branch(file_name, branch_name)
     return nil if get("contents/#{file_name}?ref=#{branch_name}").code != '200'
-    old_uri = @repo_uri
-    @repo_uri =  old_uri.gsub('api.github.com/repos', 'raw.githubusercontent.com')
+    old_uri = @@prefix
+    @@prefix =  'https://raw.githubusercontent.com'
     result = get("#{branch_name}/#{file_name}").body
-    @repo_uri = old_uri
+    @@prefix = old_uri
     result
   end
 
@@ -62,7 +63,5 @@ class GithubApi
   end
 
 end
-
-
 
 
