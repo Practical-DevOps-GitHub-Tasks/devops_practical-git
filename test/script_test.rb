@@ -82,7 +82,7 @@ class ScriptTest < Test::Unit::TestCase
   end
 
   def test_PR_template_present
-    actual = @obj.file_branch('.github/PULL_REQUEST_TEMPLATE/pull_request_template.md', 'main')
+    actual = @obj.file_branch('.github/pull_request_template.md', 'main')
     assert_not_nil(actual, 'Pull request template is absent')
   end
 
