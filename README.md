@@ -9,7 +9,7 @@
 - user can't merge to both branches without pull request,
 - allowed to merge to develop branch only if we have 2 approvals
 - merge to main branch allowed if only owner or user online-marathon approved PR
-5. Add template (pull_request_template.md) to .github/PULL_REQUEST_TEMPLATE directory for creating issue in format:
+5. Add template (pull_request_template.md) to .github directory for creating issue in format:
 
 ## Describe your changes
 
