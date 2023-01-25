@@ -26,3 +26,6 @@
 7. Add deploy keys to your repository.
 
 8. Create discord server and add notification when PR was created.
+
+9. Add repository secret for github actions with key (name) URL and the value in format USERNAME/REPOSITORY_NAME
+
