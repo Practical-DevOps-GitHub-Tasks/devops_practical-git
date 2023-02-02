@@ -1,4 +1,4 @@
-1. Add user online-marathon to this repository.
+1. Add user `softservedata` to this repository.
 
 2. Create branch develop as default branch.
 
