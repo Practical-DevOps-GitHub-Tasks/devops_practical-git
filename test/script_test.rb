@@ -7,8 +7,6 @@ class ScriptTest < Test::Unit::TestCase
     url = ENV['URL'].nil? ? '' : ENV["URL"]
     token = ENV['TOKEN'].nil? ? '' : ENV["TOKEN"]
     @obj = GithubApi.new(url, token)
-    print '###########'
-    print @obj
   end
 
   def test_health_check
