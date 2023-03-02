@@ -10,8 +10,7 @@
 name: Ruby
 
 env:
-    URL: ${{secrets.URL}}
-    TOKEN: ${{secrets.TOKEN}}
+    SECRETS_TOKEN: ${{ secrets.PAT }}
 
 on:
   push:
@@ -21,10 +20,15 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
+    
     steps:
+      - name: my-app-install token
+        id: my-app
+        uses: getsentry/action-github-app-token@v2
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v3
       - name: Set up Ruby
         uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
@@ -33,5 +37,8 @@ jobs:
       - name: Install dependencies
         run: bundle install
       - name: Run tests
+        env:
+          URL: ${{ github.repository }}
+          TOKEN: ${{ steps.my-app.outputs.token }}  
         run: ruby test/script_test.rb
 
