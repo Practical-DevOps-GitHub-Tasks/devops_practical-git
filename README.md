@@ -27,4 +27,4 @@
 
 8. For github actions: 
 - create PAT (Personal Access Token) with Full control of private repositories and Full control of orgs and teams, read and write org projects
-- add repository secret key key SECRETS_TOKEN and the value of PAT
+- add to repository actions secrets key with the name SECRETS_TOKEN and the value of PAT
