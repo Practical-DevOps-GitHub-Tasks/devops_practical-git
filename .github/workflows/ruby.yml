@@ -40,5 +40,5 @@ jobs:
         env:
           URL: ${{ github.repository }}
           TOKEN: ${{ steps.my-app.outputs.token }}  
-        run: ruby test/script_test.rb
-
+        run: 
+          ruby test/script_test.rb
