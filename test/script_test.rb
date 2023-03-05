@@ -17,7 +17,18 @@ class ScriptTest < Test::Unit::TestCase
   
   def test_token_present
     actual = @secrets_token =~ /^ghp_\w{36}$/
-    assert_not_nil(actual, 'Secret with name \'PAT\' with valid personal access token doesn\'t exist')
+    assert_not_nil(actual, "Secret with name 'PAT' with valid personal access token doesn't exist")
+  end
+
+  def test_deploy_key_present
+    response = @obj.deploy_keys
+    p response
+    assert_not_nil(response, "Access denied")
+    deploy_key = response.find {|element| element['title'] == 'DEPLOY_KEY'}
+    p deploy_key
+    assert_not_nil(deploy_key, "The deploy key with name 'DEPLOY_KEY' doesn't exist")
+    deploy_key_start = deploy_key['key'].start_with?('ssh-')
+    assert_true(deploy_key_start, 'Deploy key should contain public ssh key and start with ssh-')
   end
 
   def test_main_present

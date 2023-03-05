@@ -59,7 +59,12 @@ class GithubApi
     response = get("branches/#{branch_name}/protection")
     return nil  if response.code != '200'
     JSON.parse(response.body)["required_pull_request_reviews"]
+  end
 
+  def deploy_keys
+    response = get("keys")
+    return nil if response.code != '200'
+    JSON.parse(response.body)
   end
 
 end
